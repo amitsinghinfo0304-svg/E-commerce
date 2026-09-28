@@ -8,7 +8,7 @@ function Cart() {
       <div className="cart-sidebar" onClick={(e) => e.stopPropagation()}>
         <div className="cart-header">
           <h4>🛒 My Cart</h4>
-          <button className="clear-all-btn" onClick={clearAll}>clear all</button>
+          {cart.length>0&&<button className="clear-all-btn" onClick={clearAll}>clear all</button>}
           <button
             className="btn-close"
             onClick={() => setShowCart(false)}
@@ -33,7 +33,7 @@ function Cart() {
                 </div>
 
                 <div className="cart-increment-btn">
-                  <div>
+                  <div>                
                     <button
                       className="decrease"
                       style={{ background: "green" }}
@@ -48,15 +48,17 @@ function Cart() {
                       onClick={() => increase(item.id)}
                     >
                       +
-                    </button>
-                  </div>
+                    </button>  
+                    </div>                            
+                </div>
 
-                  <div>
+
+                <div className="cart-increment-btn">                                  
                     <button className="del-btn" onClick={()=>deleteItem(item.id)}>
                       <FaTrash size={12}  />
-                    </button>
-                  </div>
+                    </button>                
                 </div>
+
 
               </div>
             ))
