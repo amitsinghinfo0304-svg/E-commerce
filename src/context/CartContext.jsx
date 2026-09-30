@@ -1,8 +1,41 @@
-import { createContext, useState,useEffect} from "react";
-
+import { createContext, useState,useEffect,useContext} from "react";
+import { ProductContext } from "./Productcontext";
 export const CartContext = createContext(null);
 
 function CartProvider({ children }) {
+    const [priceSelection,setPriceSelection]=useState('')
+    const [catogery,setCatogery]=useState("all")
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
+
+    const {product,sub}=useContext(ProductContext)
+
+    const filterProducts = product.filter((p) =>{
+       
+        const search_filter=p.title.toLowerCase().includes(sub.toLowerCase());
+        const catogery_filter=catogery==='all' ||  p.category.toLowerCase() === catogery.toLowerCase();
+        
+        return search_filter && catogery_filter
+    }
+    ).sort((a,b)=>priceSelection==="low-high"?a.price-b.price:priceSelection==="high-low"?b.price-a.price:0).filter((e) => {
+    if (minPrice === "" && maxPrice === "") {
+        return true;
+    }
+
+    if (minPrice === "") {
+        return e.price <= Number(maxPrice);
+    }
+
+    if (maxPrice === "") {
+        return e.price >= Number(minPrice);
+    }
+
+    return (
+        e.price >= Number(minPrice) &&
+        e.price <= Number(maxPrice)
+    );
+});
+
     const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
   });
@@ -63,6 +96,11 @@ function decrease(proId) {
   );
 }
 
+
+
+
+
+
     return (
         <CartContext.Provider
             value={{
@@ -75,6 +113,18 @@ function decrease(proId) {
                 setShowCart,
                 deleteItem,
                 clearAll,
+                filterProducts,
+                catogery,
+                setCatogery,
+                priceSelection,
+                setPriceSelection,
+                minPrice,
+                setMinPrice,
+                maxPrice,
+                setMaxPrice,
+               
+                
+
             }}
         >
             {children}

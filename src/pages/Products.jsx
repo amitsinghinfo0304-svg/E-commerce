@@ -1,16 +1,22 @@
-import {useContext } from "react";
+import {useContext, useState } from "react";
 import { ProductContext } from "../context/Productcontext";
 import { CartContext } from "../context/CartContext"
 import Loader from "../components/Loader";
 const Product = () => {
+  
 
-      const {addToCart,cart,increase,decrease}=useContext(CartContext)
+      const {cart,addToCart,filterProducts,increase,decrease,catogery,setCatogery,priceSelection,setPriceSelection, minPrice,
+                setMinPrice,
+                maxPrice,
+                setMaxPrice,}=useContext(CartContext)
      const {
     
             loading,
-            filterProducts,
+            product
+            
             
         } = useContext(ProductContext);
+    const uniqueCategories = [...new Set(product.map(e=>e.category))];
 
   return (
    <section className="py-5">
@@ -41,11 +47,14 @@ const Product = () => {
               Category
             </label>
 
-            <select className="form-select">
-              <option value="">All Categories</option>
-              <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="shoes">Shoes</option>
+            <select className="form-select" value={catogery} onChange={(e)=>setCatogery(e.target.value)}>
+              <option value="all">All Categories</option>
+              {
+                uniqueCategories.map((e)=>
+                  <option value={e}>{e}</option>
+                )
+
+              }
             </select>
           </div>
 
@@ -55,15 +64,21 @@ const Product = () => {
               Sort By
             </label>
 
-            <select className="form-select">
-              <option value="">Default</option>
-              <option value="low-high">
-                Price: Low to High
-              </option>
-              <option value="high-low">
-                Price: High to Low
-              </option>
-            </select>
+           <select
+    className="form-select"
+    value={priceSelection}
+    onChange={(e)=>setPriceSelection(e.target.value)}
+>
+    <option value="">Default</option>
+
+    <option value="low-high">
+        Price: Low to High
+    </option>
+
+    <option value="high-low">
+        Price: High to Low
+    </option>
+</select>
           </div>
 
           {/* Price */}
@@ -78,6 +93,8 @@ const Product = () => {
                   type="number"
                   className="form-control"
                   placeholder="Min"
+                  value={minPrice}
+                  onChange={(e)=>setMinPrice(e.target.value)}
                 />
               </div>
 
@@ -86,6 +103,8 @@ const Product = () => {
                   type="number"
                   className="form-control"
                   placeholder="Max"
+                  value={maxPrice}
+                  onChange={(e)=>setMaxPrice(e.target.value)}
                 />
               </div>
             </div>
@@ -196,10 +215,6 @@ const Product = () => {
                 <h2 className="fw-bold mb-2">
                   No Products Found
                 </h2>
-
-                <p className="text-muted mb-0">
-                  Sorry, we couldn't find any products matching your search.
-                </p>
               </div>
             )
           )}

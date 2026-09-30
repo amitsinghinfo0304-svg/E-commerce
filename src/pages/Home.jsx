@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { ProductContext } from "../context/Productcontext";
+import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -8,7 +9,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 function Home() {
-  const { filterProducts } = useContext(ProductContext);
+
+  const navigate = useNavigate();
+
+  const { filterProducts } = useContext(CartContext);
 
   return (
     <>
@@ -20,7 +24,6 @@ function Home() {
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
-
           <div className="carousel-item active">
             <img
               src="https://www.pupzysnacks.com/assets/img/banner/banner-01.webp"
@@ -44,7 +47,6 @@ function Home() {
               alt="banner"
             />
           </div>
-
         </div>
 
         <button
@@ -64,37 +66,24 @@ function Home() {
         >
           <span className="carousel-control-next-icon" />
         </button>
-
       </div>
 
       {/* ================= PRODUCTS ================= */}
 
       <section className="py-5 bg-light">
         <div className="container">
-
           {/* Heading */}
           <div className="d-flex justify-content-between align-items-center mb-4">
-
             <div>
-              <h2 className="fw-bold mb-1">
-                Featured Products
-              </h2>
+              <h2 className="fw-bold mb-1">Featured Products</h2>
 
-              <p className="text-muted mb-0">
-                Check out our latest products
-              </p>
+              <p className="text-muted mb-0">Check out our latest products</p>
             </div>
-
-            <button className="btn btn-outline-primary">
-              View All
-            </button>
-
           </div>
 
           {/* ================= SWIPER ================= */}
 
           <div className="position-relative">
-
             <Swiper
               modules={[Navigation, Autoplay]}
               navigation={true}
@@ -124,18 +113,18 @@ function Home() {
               }}
               className="productSwiper"
             >
-
               {filterProducts?.map((product) => (
-
                 <SwiperSlide key={product.id}>
-
-                  <div className="card border-0  h-100 slider-card mt-2">
-
+                  <div
+                    className="card border-0 h-100 slider-card mt-4 mb-4"
+                    onClick={() => navigate(`/product/${product.id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
                     {/* Image */}
                     <div
-                      className="bg-black  d-flex align-items-center justify-content-center"
+                      className="bg-black d-flex align-items-center justify-content-center"
                       style={{
-                        height: "200px",
+                        height: "190px",
                       }}
                     >
                       <img
@@ -152,8 +141,6 @@ function Home() {
 
                     {/* Body */}
                     <div className="card-body d-flex justify-content-between">
-
-
                       <h5
                         className="card-title fw-semibold text-truncate"
                         title={product.title}
@@ -161,26 +148,27 @@ function Home() {
                         {product.title}
                       </h5>
 
-                      {/* Rating */}
-                       <span className="fw-bold fs-5 text-primary">
-                          ₹{Math.round(product.price)}
-                        </span>
                      
-
-                      {/* Price */}
-                      
                     </div>
+                      <div className="card-body d-flex justify-content-between flex-item-incenter">
+                     
+                     <div class="price">
+        ₹{Math.round((product.price)-((product.price)/100)*product.discountPercentage)} 
+    </div> &nbsp; 
 
+    <div class="old-price flex-item-incenter">
+        ₹{Math.round(product.price)} 
+    </div>
+    &nbsp; &nbsp; 
+     <div class="offer-text flex-item-incenter">
+        {product.discountPercentage} % OFF
+    </div> 
+                    </div>
                   </div>
-
                 </SwiperSlide>
-
               ))}
-
             </Swiper>
-
           </div>
-
         </div>
       </section>
     </>

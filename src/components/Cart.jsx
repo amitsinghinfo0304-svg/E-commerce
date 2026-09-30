@@ -8,7 +8,14 @@ function Cart() {
       <div className="cart-sidebar" onClick={(e) => e.stopPropagation()}>
         <div className="cart-header">
           <h4>🛒 My Cart</h4>
-          {cart.length>0&&<button className="clear-all-btn" onClick={clearAll}>clear all</button>}
+         {cart.length > 0 && (
+  <button
+    className="clear-all-btn"
+    onClick={clearAll}
+  >
+    Clear All
+  </button>
+)}
           <button
             className="btn-close"
             onClick={() => setShowCart(false)}

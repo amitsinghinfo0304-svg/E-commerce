@@ -22,10 +22,7 @@ function ProductProvider({ children }) {
         }, 100);
     }
 
-    function addToCart(pro, proId) {
-        console.log("PRODUCT:", pro);
-        console.log("PRODUCT ID:", proId);
-    }
+   
 
     useEffect(() => {
 
@@ -59,14 +56,14 @@ function ProductProvider({ children }) {
 
     }, []);
 
-    const filterProducts = product.filter((p) =>
-        p.title.toLowerCase().includes(sub.toLowerCase())
-    );
+    // const filterProducts = product.filter((p) =>
+    //     p.title.toLowerCase().includes(sub.toLowerCase())
+    // );
    
     return (
         <ProductContext.Provider
             value={{
-                addToCart: addToCart,
+               
                 product,
                 setProduct,
                 search,
@@ -76,7 +73,7 @@ function ProductProvider({ children }) {
                 submitData,
                 loading,
                 setLoading,
-                filterProducts,
+                
                 productSectionRef,
                
             }}
