@@ -8,13 +8,19 @@ import { Link, useLocation } from "react-router-dom";
 
 function Header() {
   const { cart, setShowCart, showCart } = useContext(CartContext);
-  const { search, setSearch, submitData } = useContext(ProductContext);
+
+  const { search, setSearch, submitData } =
+    useContext(ProductContext);
 
   const location = useLocation();
 
-  const cartCount = cart.reduce((count, item) => count + item.qty, 0);
+  // Cart count
+  const cartCount = cart.reduce(
+    (count, item) => count + item.qty,
+    0
+  );
 
-  // Page change par mobile menu close
+  // Page change hone par navbar close
   useEffect(() => {
     const navbar = document.getElementById("navbarContent");
 
@@ -28,23 +34,12 @@ function Header() {
       <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top">
         <div className="container">
 
-          {/* ================= MOBILE TOP HEADER ================= */}
-          <div className="mobile-header w-100 d-flex align-items-center justify-content-between">
+          {/* =========================================
+              MOBILE HEADER
+          ========================================= */}
+          <div className="mobile-header w-100 align-items-center justify-content-between">
 
-            {/* Hamburger */}
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarContent"
-              aria-controls="navbarContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-
-            {/* Logo */}
+            {/* Mobile Logo */}
             <Link
               className="navbar-brand fw-bold fs-3 text-primary m-0"
               to="/"
@@ -52,13 +47,13 @@ function Header() {
               NovaCart
             </Link>
 
-            {/* Cart */}
+            {/* Mobile Cart */}
             <button
               type="button"
-              className="btn btn-primary position-relative mobile-cart"
+              className="btn btn-primary position-relative"
               onClick={() => setShowCart(true)}
             >
-              🛒
+              🛒 Cart
 
               {cartCount > 0 && (
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -66,10 +61,12 @@ function Header() {
                 </span>
               )}
             </button>
-
           </div>
 
-          {/* ================= DESKTOP LOGO ================= */}
+
+          {/* =========================================
+              DESKTOP LOGO
+          ========================================= */}
           <Link
             className="navbar-brand fw-bold fs-3 text-primary desktop-logo"
             to="/"
@@ -77,42 +74,42 @@ function Header() {
             NovaCart
           </Link>
 
-          {/* ================= DESKTOP TOGGLE ================= */}
-          <button
-            className="navbar-toggler desktop-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarContent"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
 
-          {/* ================= NAVBAR CONTENT ================= */}
+          {/* =========================================
+              DESKTOP / NAVBAR CONTENT
+          ========================================= */}
           <div
             className="collapse navbar-collapse"
             id="navbarContent"
           >
 
-            {/* Menu */}
+            {/* ================= MENU ================= */}
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link
+                  className="nav-link"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/products">
+                <Link
+                  className="nav-link"
+                  to="/products"
+                >
                   Products
                 </Link>
               </li>
 
             </ul>
 
-            {/* Search */}
+
+            {/* ================= DESKTOP SEARCH ================= */}
             <form
-              className="d-flex me-lg-3 my-3 my-lg-0"
+              className="d-flex me-lg-3 my-3 my-lg-0 desktop-search"
               onSubmit={(e) => {
                 e.preventDefault();
                 submitData();
@@ -122,7 +119,9 @@ function Header() {
                 className="form-control"
                 type="search"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) =>
+                  setSearch(e.target.value)
+                }
                 placeholder="Search products..."
               />
 
@@ -134,8 +133,9 @@ function Header() {
               </button>
             </form>
 
-            {/* Right Side */}
-            <div className="d-flex align-items-center gap-2">
+
+            {/* ================= RIGHT SIDE ================= */}
+            <div className="d-flex align-items-center gap-2 desktop-actions">
 
               {/* Login */}
               <button
@@ -147,6 +147,7 @@ function Header() {
                 Login
               </button>
 
+
               {/* Signup */}
               <button
                 type="button"
@@ -156,6 +157,7 @@ function Header() {
               >
                 Signup
               </button>
+
 
               {/* Cart */}
               <button
@@ -173,10 +175,12 @@ function Header() {
               </button>
 
             </div>
-
           </div>
 
-          {/* ================= MOBILE SEARCH ================= */}
+
+          {/* =========================================
+              MOBILE SEARCH
+          ========================================= */}
           <form
             className="mobile-search w-100 mt-2"
             onSubmit={(e) => {
@@ -185,11 +189,14 @@ function Header() {
             }}
           >
             <div className="input-group">
+
               <input
                 className="form-control"
                 type="search"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) =>
+                  setSearch(e.target.value)
+                }
                 placeholder="Search products..."
               />
 
@@ -199,14 +206,19 @@ function Header() {
               >
                 Search
               </button>
+
             </div>
           </form>
 
         </div>
       </nav>
 
+
+      {/* Cart */}
       {showCart && <Cart />}
 
+
+      {/* Modals */}
       <LoginModal />
       <SignupModal />
     </>

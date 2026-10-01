@@ -760,50 +760,68 @@ body{
     --bs-text-opacity: 1;
     color: rgb(255 255 255) !important;
 }
-/* Mobile header hidden by default */
-.mobile-header,
+/* =========================================
+   DEFAULT - DESKTOP
+========================================= */
+
+.mobile-header {
+  display: none;
+}
+
 .mobile-search {
   display: none;
 }
 
-/* Desktop */
 .desktop-logo {
   display: block;
 }
 
-.desktop-toggler {
-  display: none;
-}
 
-/* Mobile */
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 991.98px) {
 
-  .desktop-logo,
-  .desktop-toggler {
-    display: none;
+  /* Desktop logo hide */
+  .desktop-logo {
+    display: none !important;
   }
 
+  /* Mobile header show */
   .mobile-header {
-    display: flex;
+    display: flex !important;
   }
 
+  /* Mobile search show */
   .mobile-search {
-    display: block;
+    display: block !important;
   }
 
-  .mobile-header .navbar-toggler {
-    border: none;
-    padding: 4px 8px;
+  /* Desktop menu completely hide */
+  #navbarContent {
+    display: none !important;
   }
 
+  /* Desktop search/actions hide */
+  .desktop-search,
+  .desktop-actions {
+    display: none !important;
+  }
+
+  /* Mobile navbar spacing */
+  .mobile-header {
+    min-height: 50px;
+  }
+
+  /* Mobile logo */
   .mobile-header .navbar-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0;
   }
 
-  .mobile-cart {
-    margin-left: auto;
+  /* Mobile cart */
+  .mobile-header .btn {
+    white-space: nowrap;
   }
 
 }
