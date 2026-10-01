@@ -27,7 +27,7 @@ function Home() {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src={banner1}
+              src="https://www.pupzysnacks.com/assets/img/banner/banner-01.webp"
               className="d-block w-100"
               alt="banner"
             />
