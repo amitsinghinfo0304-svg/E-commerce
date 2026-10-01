@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 
-import { ProductContext } from "../context/Productcontext";
+import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext";
 
 const ProductDetails = () => {

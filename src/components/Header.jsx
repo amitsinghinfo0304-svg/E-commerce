@@ -1,7 +1,7 @@
 import { useContext,useState } from "react";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
-import { ProductContext } from "../context/Productcontext";
+import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
