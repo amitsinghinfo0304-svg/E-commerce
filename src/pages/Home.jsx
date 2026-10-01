@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import banner1 from "../assets/banner-1.png";
+import {images} from "../components/Banner"
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -25,29 +25,18 @@ function Home() {
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          {
+            images.map((img,index)=><div className={`carousel-item ${index===1&& "active"}`}>
             <img
-              src={banner1}
+              src={img}
               className="d-block w-100"
               alt="banner"
             />
-          </div>
+          </div>)
 
-          <div className="carousel-item">
-            <img
-              src="https://www.pupzysnacks.com/assets/img/banner/banner-02.webp"
-              className="d-block w-100"
-              alt="banner"
-            />
-          </div>
+          }
 
-          <div className="carousel-item">
-            <img
-              src="https://www.pupzysnacks.com/assets/img/banner/banner-03.webp"
-              className="d-block w-100"
-              alt="banner"
-            />
-          </div>
+          
         </div>
 
         <button
