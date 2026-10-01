@@ -760,9 +760,9 @@ body{
     --bs-text-opacity: 1;
     color: rgb(255 255 255) !important;
 }
-/* =========================================
-   DEFAULT - DESKTOP
-========================================= */
+/* ==============================
+   DESKTOP
+============================== */
 
 .mobile-header {
   display: none;
@@ -772,14 +772,14 @@ body{
   display: none;
 }
 
-.desktop-logo {
-  display: block;
+.mobile-menu-item {
+  display: none;
 }
 
 
-/* =========================================
+/* ==============================
    MOBILE
-========================================= */
+============================== */
 
 @media (max-width: 991.98px) {
 
@@ -788,40 +788,67 @@ body{
     display: none !important;
   }
 
-  /* Mobile header show */
+  /* Mobile top header */
   .mobile-header {
     display: flex !important;
+    min-height: 50px;
   }
 
-  /* Mobile search show */
+  /* Mobile search */
   .mobile-search {
     display: block !important;
   }
 
-  /* Desktop menu completely hide */
-  #navbarContent {
+  /* Desktop search hide */
+  .desktop-search {
     display: none !important;
   }
 
-  /* Desktop search/actions hide */
-  .desktop-search,
+  /* Desktop actions hide */
   .desktop-actions {
     display: none !important;
   }
 
-  /* Mobile navbar spacing */
-  .mobile-header {
-    min-height: 50px;
+  /* Mobile menu login/signup show */
+  .mobile-menu-item {
+    display: block !important;
   }
 
-  /* Mobile logo */
+  /* Navbar menu */
+  #navbarContent {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Mobile hamburger */
+  .mobile-header .navbar-toggler {
+    display: block;
+    border: 1px solid #ddd;
+    padding: 5px 8px;
+  }
+
+  /* Logo center */
   .mobile-header .navbar-brand {
-    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  /* Mobile cart */
+  /* Cart */
   .mobile-header .btn {
     white-space: nowrap;
+  }
+
+  /* Menu links */
+  #navbarContent .nav-link {
+    padding: 10px 5px;
+  }
+
+  /* Login / Signup buttons inside menu */
+  #navbarContent .mobile-menu-item .nav-link {
+    text-align: left;
+    color: #212529;
+    text-decoration: none;
   }
 
 }

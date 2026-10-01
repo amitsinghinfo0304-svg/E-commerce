@@ -14,13 +14,12 @@ function Header() {
 
   const location = useLocation();
 
-  // Cart count
   const cartCount = cart.reduce(
     (count, item) => count + item.qty,
     0
   );
 
-  // Page change hone par navbar close
+  // Page change hone par mobile menu close
   useEffect(() => {
     const navbar = document.getElementById("navbarContent");
 
@@ -34,12 +33,24 @@ function Header() {
       <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top">
         <div className="container">
 
-          {/* =========================================
-              MOBILE HEADER
-          ========================================= */}
+          {/* ================= MOBILE TOP HEADER ================= */}
+
           <div className="mobile-header w-100 align-items-center justify-content-between">
 
-            {/* Mobile Logo */}
+            {/* Hamburger */}
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            {/* Logo */}
             <Link
               className="navbar-brand fw-bold fs-3 text-primary m-0"
               to="/"
@@ -47,7 +58,7 @@ function Header() {
               NovaCart
             </Link>
 
-            {/* Mobile Cart */}
+            {/* Cart */}
             <button
               type="button"
               className="btn btn-primary position-relative"
@@ -61,12 +72,12 @@ function Header() {
                 </span>
               )}
             </button>
+
           </div>
 
 
-          {/* =========================================
-              DESKTOP LOGO
-          ========================================= */}
+          {/* ================= DESKTOP LOGO ================= */}
+
           <Link
             className="navbar-brand fw-bold fs-3 text-primary desktop-logo"
             to="/"
@@ -75,15 +86,15 @@ function Header() {
           </Link>
 
 
-          {/* =========================================
-              DESKTOP / NAVBAR CONTENT
-          ========================================= */}
+          {/* ================= NAVBAR CONTENT ================= */}
+
           <div
             className="collapse navbar-collapse"
             id="navbarContent"
           >
 
-            {/* ================= MENU ================= */}
+            {/* Navigation Links */}
+
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
               <li className="nav-item">
@@ -104,10 +115,35 @@ function Header() {
                 </Link>
               </li>
 
+              {/* Login - Mobile Menu */}
+              <li className="nav-item mobile-menu-item">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Login
+                </button>
+              </li>
+
+              {/* Signup - Mobile Menu */}
+              <li className="nav-item mobile-menu-item">
+                <button
+                  type="button"
+                  className="nav-link btn btn-link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signupModal"
+                >
+                  Signup
+                </button>
+              </li>
+
             </ul>
 
 
             {/* ================= DESKTOP SEARCH ================= */}
+
             <form
               className="d-flex me-lg-3 my-3 my-lg-0 desktop-search"
               onSubmit={(e) => {
@@ -119,9 +155,7 @@ function Header() {
                 className="form-control"
                 type="search"
                 value={search}
-                onChange={(e) =>
-                  setSearch(e.target.value)
-                }
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
               />
 
@@ -134,7 +168,8 @@ function Header() {
             </form>
 
 
-            {/* ================= RIGHT SIDE ================= */}
+            {/* ================= DESKTOP ACTIONS ================= */}
+
             <div className="d-flex align-items-center gap-2 desktop-actions">
 
               {/* Login */}
@@ -147,7 +182,6 @@ function Header() {
                 Login
               </button>
 
-
               {/* Signup */}
               <button
                 type="button"
@@ -157,7 +191,6 @@ function Header() {
               >
                 Signup
               </button>
-
 
               {/* Cart */}
               <button
@@ -175,12 +208,12 @@ function Header() {
               </button>
 
             </div>
+
           </div>
 
 
-          {/* =========================================
-              MOBILE SEARCH
-          ========================================= */}
+          {/* ================= MOBILE SEARCH ================= */}
+
           <form
             className="mobile-search w-100 mt-2"
             onSubmit={(e) => {
@@ -194,9 +227,7 @@ function Header() {
                 className="form-control"
                 type="search"
                 value={search}
-                onChange={(e) =>
-                  setSearch(e.target.value)
-                }
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
               />
 
@@ -213,10 +244,8 @@ function Header() {
         </div>
       </nav>
 
-
       {/* Cart */}
       {showCart && <Cart />}
-
 
       {/* Modals */}
       <LoginModal />
