@@ -158,9 +158,16 @@ const Product = () => {
                           {pro.title}
                         </h5>
 
-                        <p className="product-category">
+                       <div className="d-flex justify-content-between">
+                          <p className="product-category">
                           {pro.category}
                         </p>
+                          <p style={{ color: "red" }}>
+  {cart.find((e) => e.id === pro.id)?.qty >= pro.stock &&
+    "Limit Exceeded"}
+</p>
+
+                        </div>
 
                         <div className="product-bottom">
 
@@ -171,22 +178,25 @@ const Product = () => {
                           {cart.find((e) => e.id === pro.id) ? (
                             <div>
                               <button
+                               
                                 className="decrease"
                                 style={{ background: "green" }}
                                 onClick={() => decrease(pro.id)}
+                               
                               >
                                 -
                               </button>
 
                               <span style={{ margin: "0 5px" }}>
-                                 { cart.find((e) => e.id === pro.id).qty }
+                                 { cart.find((e) => e.id === pro.id)?.qty }
 
                               </span>
 
                               <button
                                 className="increase"
-                                style={{ background: "green" }}
+                                style={{ background:cart.find((e) => e.id === pro.id).qty<pro.stock?'green':'gray'  }}
                                 onClick={() => increase(pro.id)}
+                                 disabled={cart.find((e) => e.id === pro.id).qty>=pro.stock}
                               >
                                 +
                               </button>

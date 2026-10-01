@@ -17,7 +17,7 @@ function Header() {
         <div className="container">
           {/* Logo */}
           <a className="navbar-brand fw-bold fs-3 text-primary" href="/">
-            ShopZone
+            NovaCart
           </a>
 
           {/* Mobile Toggle */}

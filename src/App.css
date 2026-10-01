@@ -1,3 +1,6 @@
+body{
+  user-select: none;
+}
 .product-section {
   position: relative;
 }
@@ -720,20 +723,20 @@
     width: fit-content;
   
     color: #198754;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 4px;
 }
 
 .price {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 700;
     color: #111;
 }
 
 .old-price {
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: line-through;
       color: #444343;
 }
@@ -743,4 +746,17 @@
   align-items: center;
   text-align: center;
 
+}
+.rating {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  font-size: 25px;
+  line-height: 1;
+}
+.text-secondary {
+    --bs-text-opacity: 1;
+    color: rgb(255 255 255) !important;
 }

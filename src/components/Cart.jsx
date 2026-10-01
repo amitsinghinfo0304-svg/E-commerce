@@ -3,6 +3,17 @@ import { CartContext } from "../context/CartContext";
 import { FaTrash } from "react-icons/fa";
 function Cart() {
   const { cart, setShowCart, decrease, increase,deleteItem,clearAll } = useContext(CartContext);
+const totalDiscount =(
+  cart.reduce(
+    (total, item) =>
+      total +
+      ((item.qty * item.price) / 100) * item.discountPercentage,
+    0
+  )
+).toFixed(2);
+
+
+
   return (
     <div className="cart-overlay" onClick={() => setShowCart(false)}>
       <div className="cart-sidebar" onClick={(e) => e.stopPropagation()}>
@@ -35,8 +46,15 @@ function Cart() {
 
                 <div className="cart-info">
                   <h6>{item.title}</h6>
-                  <p>₹{Math.round(item.qty * item.price)}</p>
-                  <span>Qty: {item.qty || 1}</span>
+                  <br />
+                  <div className="d-flex justify-content-between flex-item-incenter">
+                     <div className="price flex-item-incenter">₹{((item.qty * item.price)-((item.qty * item.price)/100)*item.discountPercentage).toFixed(2)}</div>
+                     <div class="old-price">₹{(item.qty * item.price).toFixed(2)}</div>
+                  
+                  {/* <span>Qty: {item.qty || 1}</span> */}
+
+                  </div>
+                 
                 </div>
 
                 <div className="cart-increment-btn">
@@ -51,8 +69,9 @@ function Cart() {
                     <span> {cart.find((e) => e.id === item.id).qty} </span>
                     <button
                       className="increase"
-                      style={{ background: "green" }}
                       onClick={() => increase(item.id)}
+                      style={{ background:cart.find((e) => e.id === item.id).qty<item.stock?'green':'gray'  }}
+                      disabled={cart.find((e) => e.id === item.id).qty>=item.stock}
                     >
                       +
                     </button>  
@@ -73,12 +92,15 @@ function Cart() {
         </div>
 
         <div className="cart-footer">
+          {/* {totalDiscount} */}
           <h5>
             Total: ₹
+          
             {cart.reduce(
-              (total, item) => Math.round(total + item.price * (item.qty || 1)),
+              (total, item) =>(total + ((item.price * (item.qty || 1))-((item.qty * item.price)/100)*item.discountPercentage)),
               0,
-            )}
+            ).toFixed(2)}
+           
           </h5>
           <button className="btn btn-primary w-100">Checkout</button>
         </div>

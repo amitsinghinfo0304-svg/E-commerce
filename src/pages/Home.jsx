@@ -26,7 +26,7 @@ function Home() {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src="https://www.pupzysnacks.com/assets/img/banner/banner-01.webp"
+              src="src/assets/banner-1.png"
               className="d-block w-100"
               alt="banner"
             />
@@ -153,11 +153,11 @@ function Home() {
                       <div className="card-body d-flex justify-content-between flex-item-incenter">
                      
                      <div class="price">
-        ₹{Math.round((product.price)-((product.price)/100)*product.discountPercentage)} 
+        ₹{((product.price)-((product.price)/100)*product.discountPercentage).toFixed(0)} 
     </div> &nbsp; 
 
     <div class="old-price flex-item-incenter">
-        ₹{Math.round(product.price)} 
+        ₹{(product.price).toFixed(0)} 
     </div>
     &nbsp; &nbsp; 
      <div class="offer-text flex-item-incenter">

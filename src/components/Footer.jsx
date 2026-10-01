@@ -9,7 +9,7 @@ function Footer() {
 
           {/* About */}
           <div className="col-lg-4 col-md-6 mb-4">
-            <h4 className="fw-bold text-primary">ShopZone</h4>
+            <h4 className="fw-bold text-primary">NovaCart</h4>
 
             <p className="text-secondary mt-3">
               Shop your favorite products at the best prices.
@@ -53,7 +53,7 @@ function Footer() {
 
               <li className="mb-2">
                 <a
-                  href="/categories"
+                  // href="/categories"
                   className="text-secondary text-decoration-none"
                 >
                   Categories
@@ -62,7 +62,7 @@ function Footer() {
 
               <li className="mb-2">
                 <a
-                  href="/about"
+                  // href="/about"
                   className="text-secondary text-decoration-none"
                 >
                   About Us
@@ -78,7 +78,7 @@ function Footer() {
             <ul className="list-unstyled mt-3">
               <li className="mb-2">
                 <a
-                  href="/contact"
+                  // href="/contact"
                   className="text-secondary text-decoration-none"
                 >
                   Contact Us
@@ -87,7 +87,7 @@ function Footer() {
 
               <li className="mb-2">
                 <a
-                  href="/shipping"
+                  // href="/shipping"
                   className="text-secondary text-decoration-none"
                 >
                   Shipping
@@ -105,7 +105,7 @@ function Footer() {
 
               <li className="mb-2">
                 <a
-                  href="/faq"
+                  // href="/faq"
                   className="text-secondary text-decoration-none"
                 >
                   FAQ
@@ -124,7 +124,7 @@ function Footer() {
               </li>
 
               <li className="mb-2">
-                📧 support@shopzone.com
+                📧 support@NovaCart.com
               </li>
 
               <li className="mb-2">
@@ -157,7 +157,7 @@ function Footer() {
 
           <div className="col-md-6 text-center text-md-start">
             <p className="text-secondary mb-0">
-              © 2026 ShopZone. All rights reserved.
+              © 2026 NovaCart. All rights reserved.
             </p>
           </div>
 
