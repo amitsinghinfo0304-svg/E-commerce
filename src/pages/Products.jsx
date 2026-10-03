@@ -1,9 +1,10 @@
 import {useContext, useState } from "react";
 import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext"
+import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 const Product = () => {
-  
+   const navigate = useNavigate();
 
       const {cart,addToCart,filterProducts,increase,decrease,catogery,setCatogery,priceSelection,setPriceSelection, minPrice,
                 setMinPrice,
@@ -137,86 +138,103 @@ const Product = () => {
               filterProducts.map((pro, index) => {
 
                 return (
-                  <div
-                    className="product-item"
-                    key={index}
-                  >
+                 <div
+  className="product-item"
+  key={index}
+  onClick={() => navigate(`/product/${pro.id}`)}
+  style={{ cursor: "pointer" }}
+>
+  <div className="product-card">
 
-                    <div className="product-card">
+    <div className="product-image">
+      <img
+        src={pro.thumbnail}
+        className="product-img"
+        alt={pro.title}
+      />
+    </div>
 
-                      <div className="product-image">
-                        <img
-                          src={pro.thumbnail}
-                          className="product-img"
-                          alt={pro.title}
-                        />
-                      </div>
+    <div className="product-card-body">
 
-                      <div className="product-card-body">
+      <h5 className="product-title">
+        {pro.title}
+      </h5>
 
-                        <h5 className="product-title">
-                          {pro.title}
-                        </h5>
+      <div className="d-flex justify-content-between">
+        <p className="product-category">
+          {pro.category}
+        </p>
 
-                       <div className="d-flex justify-content-between">
-                          <p className="product-category">
-                          {pro.category}
-                        </p>
-                          <p style={{ color: "red" }}>
-  {cart.find((e) => e.id === pro.id)?.qty >= pro.stock &&
-    "Limit Exceeded"}
-</p>
+        <p style={{ color: "red" }}>
+          {cart.find((e) => e.id === pro.id)?.qty >= pro.stock &&
+            "Limit Exceeded"}
+        </p>
+      </div>
 
-                        </div>
+      <div className="product-bottom">
 
-                        <div className="product-bottom">
+        <span className="product-price">
+          ₹{pro.price}
+        </span>
 
-                          <span className="product-price">
-                            ₹{pro.price}
-                          </span>
+        {cart.find((e) => e.id === pro.id) ? (
 
-                          {cart.find((e) => e.id === pro.id) ? (
-                            <div>
-                              <button
-                               
-                                className="decrease"
-                                style={{ background: "green" }}
-                                onClick={() => decrease(pro.id)}
-                               
-                              >
-                                -
-                              </button>
+          <div>
+            <button
+              className="decrease"
+              style={{ background: "green" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                decrease(pro.id);
+              }}
+            >
+              -
+            </button>
 
-                              <span style={{ margin: "0 5px" }}>
-                                 { cart.find((e) => e.id === pro.id)?.qty }
+            <span style={{ margin: "0 5px" }}>
+              {cart.find((e) => e.id === pro.id)?.qty}
+            </span>
 
-                              </span>
+            <button
+              className="increase"
+              style={{
+                background:
+                  cart.find((e) => e.id === pro.id).qty < pro.stock
+                    ? "green"
+                    : "gray",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                increase(pro.id);
+              }}
+              disabled={
+                cart.find((e) => e.id === pro.id).qty >= pro.stock
+              }
+            >
+              +
+            </button>
+          </div>
 
-                              <button
-                                className="increase"
-                                style={{ background:cart.find((e) => e.id === pro.id).qty<pro.stock?'green':'gray'  }}
-                                onClick={() => increase(pro.id)}
-                                 disabled={cart.find((e) => e.id === pro.id).qty>=pro.stock}
-                              >
-                                +
-                              </button>
-                            </div>
-                          ) : (
-                            <button
-                              className="add-cart-btn"
-                              onClick={() => addToCart(pro, pro.id)}
-                            >
-                              Add to Cart
-                            </button>
-                          )}
+        ) : (
 
-                        </div>
+          <button
+            className="add-cart-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(pro, pro.id);
+            }}
+          >
+            Add to Cart
+          </button>
 
-                      </div>
+        )}
 
-                    </div>
+      </div>
 
-                  </div>
+    </div>
+
+  </div>
+</div>
                 );
 
               })

@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
-
 import { ProductContext } from "../context/ProductContext";
 import { CartContext } from "../context/CartContext";
 
@@ -27,11 +26,7 @@ function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
-    // Tumhara existing search function
     submitData();
-
-    // Search ke baad direct Products page
     navigate("/products");
   };
 
