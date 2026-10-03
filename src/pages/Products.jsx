@@ -51,8 +51,8 @@ const Product = () => {
             <select className="form-select" value={catogery} onChange={(e)=>setCatogery(e.target.value)}>
               <option value="all">All Categories</option>
               {
-                uniqueCategories.map((e)=>
-                  <option value={e}>{e}</option>
+                uniqueCategories.map((e,index)=>
+                  <option value={e} key={index}>{e}</option>
                 )
 
               }

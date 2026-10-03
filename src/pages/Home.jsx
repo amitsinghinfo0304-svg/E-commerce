@@ -26,7 +26,7 @@ function Home() {
       >
         <div className="carousel-inner">
           {
-            images.map((img,index)=><div className={`carousel-item ${index===1&& "active"}`}>
+            images.map((img,index)=><div className={`carousel-item ${index===1&& "active"}`} key={index}>
             <img
               src={img}
               className="d-block w-100"
@@ -142,15 +142,15 @@ function Home() {
                     </div>
                       <div className="card-body d-flex justify-content-between flex-item-incenter">
                      
-                     <div class="price">
+                     <div className="price">
         ₹{((product.price)-((product.price)/100)*product.discountPercentage).toFixed(0)} 
     </div> &nbsp; 
 
-    <div class="old-price flex-item-incenter">
+    <div className="old-price flex-item-incenter">
         ₹{(product.price).toFixed(0)} 
     </div>
     &nbsp; &nbsp; 
-     <div class="offer-text flex-item-incenter">
+     <div className="offer-text flex-item-incenter">
         {product.discountPercentage} % OFF
     </div> 
                     </div>

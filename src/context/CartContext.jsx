@@ -56,6 +56,7 @@ function clearAll(){
 function addToCart(pro, proId) {
 
     setCart((prevCart) => {
+        
 
         const productExists = prevCart.find(
             (item) => item.id === proId
@@ -95,9 +96,6 @@ function decrease(proId) {
       .filter((item) => item.qty > 0)
   );
 }
-
-
-
 
 
 
