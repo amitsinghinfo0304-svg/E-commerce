@@ -2,8 +2,8 @@ import { useContext, useEffect } from "react";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 
-import { CartContext } from "../context/CartContext";
 import { ProductContext } from "../context/ProductContext";
+import { CartContext } from "../context/CartContext";
 
 import Cart from "./Cart";
 
@@ -16,7 +16,9 @@ import {
 function Header() {
   const { cart, setShowCart, showCart } = useContext(CartContext);
 
-  const { search, setSearch } = useContext(ProductContext);
+  // Existing search logic
+  const { search, setSearch, submitData } =
+    useContext(ProductContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,16 +28,11 @@ function Header() {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    const query = search.trim();
+    // Tumhara existing search function
+    submitData();
 
-    // Empty search ko submit mat karo
-    if (!query) {
-      navigate("/products");
-      return;
-    }
-
-    // Products page par search query ke saath navigate
-    navigate(`/products?search=${encodeURIComponent(query)}`);
+    // Search ke baad direct Products page
+    navigate("/products");
   };
 
   // ================= CART COUNT =================
@@ -47,7 +44,6 @@ function Header() {
 
   // ================= MOBILE MENU CLOSE =================
 
-  // Page change hone par mobile menu close
   useEffect(() => {
     const navbar = document.getElementById("navbarContent");
 
@@ -100,6 +96,7 @@ function Header() {
                 </span>
               )}
             </button>
+
           </div>
 
           {/* ================= DESKTOP LOGO ================= */}
@@ -180,7 +177,6 @@ function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                aria-label="Search products"
               />
 
               <button
@@ -231,6 +227,7 @@ function Header() {
               </button>
 
             </div>
+
           </div>
 
           {/* ================= MOBILE SEARCH ================= */}
@@ -247,7 +244,6 @@ function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                aria-label="Search products"
               />
 
               <button
