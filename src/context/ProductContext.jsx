@@ -62,8 +62,7 @@ function ProductProvider({ children }) {
    
     return (
         <ProductContext.Provider
-            value={{
-               
+            value={{             
                 product,
                 setProduct,
                 search,
@@ -73,9 +72,7 @@ function ProductProvider({ children }) {
                 submitData,
                 loading,
                 setLoading,
-                
-                productSectionRef,
-               
+                productSectionRef,   
             }}
         >
             {children}

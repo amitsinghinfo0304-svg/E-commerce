@@ -1,23 +1,51 @@
 import { useContext, useEffect } from "react";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
-import { ProductContext } from "../context/ProductContext";
+
 import { CartContext } from "../context/CartContext";
+import { ProductContext } from "../context/ProductContext";
+
 import Cart from "./Cart";
-import { Link, useLocation } from "react-router-dom";
+
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 function Header() {
   const { cart, setShowCart, showCart } = useContext(CartContext);
 
-  const { search, setSearch, submitData } =
-    useContext(ProductContext);
+  const { search, setSearch } = useContext(ProductContext);
 
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // ================= SEARCH =================
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const query = search.trim();
+
+    // Empty search ko submit mat karo
+    if (!query) {
+      navigate("/products");
+      return;
+    }
+
+    // Products page par search query ke saath navigate
+    navigate(`/products?search=${encodeURIComponent(query)}`);
+  };
+
+  // ================= CART COUNT =================
 
   const cartCount = cart.reduce(
     (count, item) => count + item.qty,
     0
   );
+
+  // ================= MOBILE MENU CLOSE =================
 
   // Page change hone par mobile menu close
   useEffect(() => {
@@ -72,9 +100,7 @@ function Header() {
                 </span>
               )}
             </button>
-
           </div>
-
 
           {/* ================= DESKTOP LOGO ================= */}
 
@@ -85,7 +111,6 @@ function Header() {
             NovaCart
           </Link>
 
-
           {/* ================= NAVBAR CONTENT ================= */}
 
           <div
@@ -93,10 +118,11 @@ function Header() {
             id="navbarContent"
           >
 
-            {/* Navigation Links */}
+            {/* ================= NAVIGATION LINKS ================= */}
 
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
+              {/* Home */}
               <li className="nav-item">
                 <Link
                   className="nav-link"
@@ -106,6 +132,7 @@ function Header() {
                 </Link>
               </li>
 
+              {/* Products */}
               <li className="nav-item">
                 <Link
                   className="nav-link"
@@ -115,7 +142,7 @@ function Header() {
                 </Link>
               </li>
 
-              {/* Login - Mobile Menu */}
+              {/* Login - Mobile */}
               <li className="nav-item mobile-menu-item">
                 <button
                   type="button"
@@ -127,7 +154,7 @@ function Header() {
                 </button>
               </li>
 
-              {/* Signup - Mobile Menu */}
+              {/* Signup - Mobile */}
               <li className="nav-item mobile-menu-item">
                 <button
                   type="button"
@@ -141,15 +168,11 @@ function Header() {
 
             </ul>
 
-
             {/* ================= DESKTOP SEARCH ================= */}
 
             <form
               className="d-flex me-lg-3 my-3 my-lg-0 desktop-search"
-              onSubmit={(e) => {
-                e.preventDefault();
-                submitData();
-              }}
+              onSubmit={handleSearch}
             >
               <input
                 className="form-control"
@@ -157,6 +180,7 @@ function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
+                aria-label="Search products"
               />
 
               <button
@@ -166,7 +190,6 @@ function Header() {
                 Search
               </button>
             </form>
-
 
             {/* ================= DESKTOP ACTIONS ================= */}
 
@@ -208,18 +231,13 @@ function Header() {
               </button>
 
             </div>
-
           </div>
-
 
           {/* ================= MOBILE SEARCH ================= */}
 
           <form
             className="mobile-search w-100 mt-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitData();
-            }}
+            onSubmit={handleSearch}
           >
             <div className="input-group">
 
@@ -229,6 +247,7 @@ function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
+                aria-label="Search products"
               />
 
               <button
@@ -244,10 +263,12 @@ function Header() {
         </div>
       </nav>
 
-      {/* Cart */}
+      {/* ================= CART ================= */}
+
       {showCart && <Cart />}
 
-      {/* Modals */}
+      {/* ================= MODALS ================= */}
+
       <LoginModal />
       <SignupModal />
     </>
